@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="script20.js"></script>
+<style>
+.button {
+    background-color: #f39c12;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button5 {padding: 5px 10px;border-radius: 50%;}
+
+.container123 {
+  font-weight: 500;
+  font-size: 800%;
+    text-align: center;
+      color: #95a5a6;
+      padding-top: 50px;
+  
+}
+.container1 {
+  font-weight: 500;
+  font-size: 450%;
+  text-align:center;
+   display:inline-block;
+        color: #e67e22;
+  
+}
+</style>
+</head>
+<body background="background.jpg">
+<div ng-app="myapplication" ng-controller=AppCtrl>
+<div class="container123">
+{{theTime}}
+</div>
+<center>
+<div class="container1"  class="row" >{{greet}}</div>
+<div class="container1"  class="row" ng-repeat="fn in finalname">
+,&nbsp;{{fn}}.
+</div>
+</center>
+<br>
+<div ng-hide="myvalue" class="ng-hide">
+<font color="white" size="6" ><b><center>What is your Name?</center></b></font>
+<div class="row">
+        <div class="col s6 offset-s4"><span class="flow-text">
+        <input type="text" style="color:white;font-size:250%;" class="input-field col s8" ng-model = "name">
+        <button class="button" ng-click="reset()">next</button> 
+        </span>
+        </div>
+</div> 
+
+</div>
+<font color="white" size="6"><b><center>What is your main focus for today?</center></b></font>
+<form ng-submit="submit()" ng-controller="mycontroller">
+<div class="row">
+        <div class="col s6 offset-s4"><span class="flow-text">
+        <input type="text" style="color:white;font-size:250%;" class="input-field col s8" ng-model = "text">
+         <input class="button" type="submit" id="submit" value="Submit" />
+         </span>
+         </div><br><br><br>
+    <div class="container" style="text-align: center">
+    <ul class="list-group">
+      <li class="list-group-item" style="color:white;font-size:200%;" ng-repeat="text in list">
+        
+      <b>{{text}}</b><button class="button button5"  ng-click="removeTask($index)">x</button>
+      </li>
+    </ul>
+    </div>
+
+</div> 
+</form>
+</div>
+</body>
+</html>
