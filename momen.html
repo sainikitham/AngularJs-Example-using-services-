@@ -2,6 +2,8 @@
 <html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="script20.js"></script>
@@ -19,13 +21,13 @@
     cursor: pointer;
 }
 .button5 {padding: 5px 10px;border-radius: 50%;}
-
 .container123 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 800%;
     text-align: center;
-      color: #95a5a6;
-      padding-top: 50px;
+      color: white;
+      padding-top: 110px;
+      
   
 }
 .container1 {
@@ -37,6 +39,27 @@
   
 }
 </style>
+<script>
+$(document).ready(function(){
+	$( "#target" ).click(function() {
+		
+		 $('#target').attr('contenteditable','true');
+		 
+	});
+	$( "#target" ).on("keydown",function(e){
+		if(e.which == 13)
+			{
+			 $('#target').attr('contenteditable','false');
+			var a=this.innerHTML.trim();
+	        setCook(a)
+			}
+	});
+	function setCook(val){
+		 document.cookie="cookie="+val;
+	}
+	
+});
+</script>
 </head>
 <body background="background.jpg">
 <div ng-app="myapplication" ng-controller=AppCtrl>
@@ -44,22 +67,25 @@
 {{theTime}}
 </div>
 <center>
-<div class="container1"  class="row" >{{greet}}</div>
-<div class="container1"  class="row" ng-repeat="fn in finalname">
-,&nbsp;{{fn}}.
+<div class="container1"  class="row" >{{greet}}&nbsp;</div>
+
+<div  id="target" class="container1"  class="row">
+{{fistname}}
 </div>
+
 </center>
 <br>
 <div ng-hide="myvalue" class="ng-hide">
 <font color="white" size="6" ><b><center>What is your Name?</center></b></font>
+<form ng-submit="submit()">
 <div class="row">
         <div class="col s6 offset-s4"><span class="flow-text">
-        <input type="text" style="color:white;font-size:250%;" class="input-field col s8" ng-model = "name">
-        <button class="button" ng-click="reset()">next</button> 
+        <input id="here" type="text" style="color:white;font-size:250%;" class="input-field col s8" ng-model="thename">
+        <button class="button" ng-click="reset(thename)">next</button> 
         </span>
         </div>
 </div> 
-
+</form>
 </div>
 <font color="white" size="6"><b><center>What is your main focus for today?</center></b></font>
 <form ng-submit="submit()" ng-controller="mycontroller">
@@ -73,7 +99,7 @@
     <ul class="list-group">
       <li class="list-group-item" style="color:white;font-size:200%;" ng-repeat="text in list">
         
-      <b>{{text}}</b><button class="button button5"  ng-click="removeTask($index)">x</button>
+      <b style="font-style: italic">{{text}}</b><button class="button button5"  ng-click="removeTask($index)">x</button>
       </li>
     </ul>
     </div>

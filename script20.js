@@ -1,4 +1,5 @@
-var appmod = angular.module("myapplication",[]);
+var appmod = angular.module("myapplication",['ngCookies']);
+
 
 
 appmod.service("date",function(){
@@ -28,24 +29,32 @@ appmod.service('service2',function(date,$filter){
 	}	
 	
 });
-
-appmod.controller("AppCtrl", function ($scope,date,service2,$interval,$filter) {
+appmod.controller("AppCtrl", function ($scope,date,service2,$interval,$filter,$cookies) {
+	 $scope.submit = function() {
+		 $scope.fistname = $scope.thename;
+		 $scope.myvalue = true; 
+	 }
 	$scope.myvalue = false;
-	$scope.reset = function(){
-		$scope.finalname = [];
-		if ($scope.name) {
-	          $scope.finalname.push(this.name);
-	          $scope.name = '';
-	        }
-		 $scope.myvalue = true;  
-	};
+	
+	$scope.fistname= $cookies.get('cookie');
+	
+	$scope.reset = function(value){
+			$cookies.put ('cookie',value);
+			
+	}
+	if($scope.fistname){
+		$scope.myvalue = true; 
+	}
+	 
+	//$scope.myvalue = true; 
 	$scope.theTime = new Date().toLocaleTimeString();
 	  $interval(function () {
-	      $scope.theTime =  $filter('date')(new Date(), 'HH:MM a');
+	      $scope.theTime =  $filter('date')(new Date(), 'hh:mm a');
 	  }, 1000);
   $scope.time = date.dt;
   $scope.time1 = date.minute;
   $scope.greet = service2.greet;
+	 
 
 });
 appmod.controller('mycontroller',function($scope)
