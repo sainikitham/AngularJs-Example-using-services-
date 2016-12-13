@@ -15,7 +15,7 @@ appmod.service('service2',function(date,$filter){
 	{
 		this.greet = "Good morning";
 	}
-	else if(time =>12  && time <= 15)
+	else if(time >=12  && time <= 15)
 	{
 		this.greet = "Good afternoon";
 	}
